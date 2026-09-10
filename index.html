@@ -11,7 +11,7 @@
     --surface: #FFFFFF;
     --ink: #0B1F3A;
     --ink-soft: #48566B;
-    --ink-mute: #6B7280;
+    --ink-mute: #666D76;
     --accent: #C8A97E;
     --rule: rgba(11, 31, 58, 0.10);
     --good-bg: #ECF6F1;
@@ -128,7 +128,7 @@
   <tbody>
     <tr>
       <td>Publish a team</td>
-      <td>The team name, an optional company domain, the brand colour, which card templates are allowed, any team logo and banner image you upload, an anonymous identifier for your iCloud account, and the time of the update.</td>
+      <td>The team code, the team name, an optional company domain, the brand colour, which card templates are allowed, any team logo and banner image you upload, an anonymous identifier for your iCloud account, and the time of the update.</td>
     </tr>
     <tr>
       <td>Join a team</td>
@@ -150,7 +150,7 @@
   <li>No analytics, product telemetry or crash reporting service.</li>
   <li>No advertising, no advertising identifiers, no profiling.</li>
   <li>No location data.</li>
-  <li>No third-party software development kits of any kind. The app contains no code from analytics, advertising or social networks.</li>
+  <li>No analytics, advertising or social-network code of any kind. The app does link four open-source libraries — Apple’s swift-crypto, swift-certificates and swift-asn1, plus ZIPFoundation — used solely to build and sign an Apple Wallet pass on your device. None of them make network connections or collect anything.</li>
   <li>No payment information. The app does not sell anything.</li>
 </ul>
 <p>The app makes no network connections except to Apple's iCloud. There is no server of ours for it to talk to.</p>
@@ -161,9 +161,10 @@
   <thead><tr><th>Permission</th><th>Why, and what happens</th></tr></thead>
   <tbody>
     <tr><td>Camera</td><td>To scan QR codes, business cards and event badges. Recognition happens on your device. Images are not uploaded.</td></tr>
-    <tr><td>Photos (choose)</td><td>Only to pick a profile photo, logo or banner, or to read a card image you select.</td></tr>
+    <tr><td>Photos (choose)</td><td>Only to pick a profile photo, logo or banner, or to read a card image you select. This uses Apple’s picker, which runs outside the app, so iOS does not ask for a permission and the app is handed only the image you chose.</td></tr>
     <tr><td>Photos (add)</td><td>Only to save your QR code or a video-call background when you ask for it.</td></tr>
     <tr><td>Contacts</td><td>To save a scanned person to your address book, and to let you fill your own card from a contact you pick. The app reads only the contact you choose; it never browses your address book.</td></tr>
+    <tr><td>NFC</td><td>Declared so a card could be shared by holding an iPhone to a tag or reader. It is switched off in the current release, so iOS will not ask for it and no tag is ever read.</td></tr>
   </tbody>
 </table>
 </div>
@@ -172,10 +173,13 @@
 <h2>Sharing your card</h2>
 <p>When you share a card by QR code, AirDrop, Message, email or Apple Wallet, the details travel directly from your device to the recipient. Nothing passes through us.</p>
 <p>Apple Wallet passes are built and cryptographically signed <strong>on your iPhone</strong>. No server is involved in creating them.</p>
+<p>The app also publishes a Shortcuts action that exports your saved contacts as a CSV file, so you can automate getting them into a spreadsheet or a CRM. It runs on your device and only when a shortcut you built asks it to, but a shortcut can pass that file to another app, so treat it as you would any other export.</p>
 <p>Once you have handed your details to someone, what they do with them is outside our control and outside this policy.</p>
 
 <h2>Deleting your data</h2>
-<p><strong>Cards and contacts.</strong> Settings → Delete all data removes every card and contact from your iPhone and from your iCloud backup. Deleting the app also removes its local storage. Export your contacts to CSV first if you want to keep them, because this cannot be undone.</p>
+<p><strong>On your iPhone.</strong> Settings → Delete all data immediately removes every card, every saved contact, every template you designed, your usage counters, and the copy of your team held on the device. Deleting the app removes its local storage as well.</p>
+<p><strong>In your iCloud.</strong> The same button deletes the iCloud copies of your cards and contacts. If your iPhone is offline or signed out at the time, that deletion stays queued and completes the next time the app syncs successfully.</p>
+<p>Export your contacts to CSV first if you want to keep them, because none of this can be undone.</p>
 <div class="callout warn">
   <p><strong>Team records are the exception.</strong> The current version of the app cannot delete a team you published or a membership you created. If you want those removed, email <a href="mailto:antoine.debroye@gmail.com">antoine.debroye@gmail.com</a> and we will delete them for you. We intend to make this possible in the app itself.</p>
 </div>
